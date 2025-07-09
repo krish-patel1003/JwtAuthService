@@ -26,6 +26,9 @@ openssl rsa -pubout -in app.key -out app.pub
 Add KEY config to application.yaml
 
 ### 4. SecurityConfig
+
+#### SecurityFilterChain
+
 | Part                                                     | Purpose                                                                           |
 | -------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | `.csrf().disable()`                                      | CSRF disabled for stateless REST APIs                                             |
@@ -34,13 +37,18 @@ Add KEY config to application.yaml
 | `.oauth2ResourceServer().jwt()`                          | Enable JWT-based security                                                         |
 | `.authenticationEntryPoint()` / `.accessDeniedHandler()` | Proper handling of 401/403 errors                                                 |
 
+- AuthenticationManager()
+- PasswordEncoder(); BCryptPasswordEncoder
+
 ### 5. JwtService and JwtConfig
-Jwt Properties
-- @Configuration
-JwtService
+#### Jwt Properties
+- @ConfigurationProperties
+  
+#### JwtService
 - generateToken(): generates token using JwtEncoder and claimSet params [subject(username), issuer(appnam), duration(ttl)]
-JwtConfig
-- @EnableConfiguration, @RequiredArgsConstructor
-- Encoder(), Decoder(), JwtService()
+  
+#### JwtConfig
+- @EnableConfigurationProperties, @RequiredArgsConstructor
+- Encoder(), Decoder()
 
 ### 6. 
